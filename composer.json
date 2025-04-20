@@ -5,7 +5,7 @@
     "keywords": ["helper", "package", "laravel", "impression", "click", "ctr", "count", "activity"],
     "homepage": "https://github.com/s-m-alif-ahmmed/metrics-tracker",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "authors": [
         {
             "name": "S M Alif Ahmmed",
