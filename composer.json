@@ -1,0 +1,41 @@
+{
+    "name": "alifahmmed/metrics-tracker",
+    "type": "library",
+    "description": "A Laravel helper package for store impression, click of a post with filter and ctr.",
+    "keywords": ["helper", "package", "laravel", "impression", "click", "ctr", "count", "activity"],
+    "homepage": "https://github.com/s-m-alif-ahmmed/metrics-tracker-package",
+    "license": "MIT",
+    "version": "1.0.1",
+    "authors": [
+        {
+            "name": "S M Alif Ahmmed",
+            "email": "smalifahmmed@gmail.com",
+            "homepage": "https://smalifahmmed.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "illuminate/support": "^9.0|^10.0|^11.0|^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AlifAhmmed\\MetricsTracker\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AlifAhmmed\\MetricsTracker\\MetricsTrackerServiceProvider"
+            ],
+            "aliases": {
+                "Helper": "AlifAhmmed\\MetricsTracker\\Helpers\\MetricsTracker"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
