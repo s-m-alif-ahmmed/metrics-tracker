@@ -1,6 +1,6 @@
 <?php
 
-namespace AlifAhmmed\MetricsTracker;
+namespace AlifAhmmed\MetricsTracker\Helpers;
 
 use AlifAhmmed\Models\Metric;
 use Illuminate\Support\Facades\Request;
