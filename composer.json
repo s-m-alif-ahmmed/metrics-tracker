@@ -3,7 +3,7 @@
     "type": "library",
     "description": "A Laravel helper package for store impression, click of a post with filter and ctr.",
     "keywords": ["helper", "package", "laravel", "impression", "click", "ctr", "count", "activity"],
-    "homepage": "https://github.com/s-m-alif-ahmmed/metrics-tracker-package",
+    "homepage": "https://github.com/s-m-alif-ahmmed/metrics-tracker",
     "license": "MIT",
     "version": "1.0.1",
     "authors": [
