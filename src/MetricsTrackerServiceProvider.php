@@ -20,15 +20,10 @@ class MetricsTrackerServiceProvider extends ServiceProvider
         // Routes
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
-        // Migrations
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'migrations');
-
-
         // Publishable assets
         $this->publishes([
-            __DIR__.'/../public/js/metrics-tracker.js' => public_path('vendor/alifahmmed/metrics-tracker.js'),
+            __DIR__.'/../public/js/metrics-tracker.js' => public_path('package/alifahmmed/metrics-tracker.js'),
+            __DIR__.'/../database/migrations' => database_path('migrations/2025_04_20_063458_create_metrics_table.php'),
         ], 'public');
 
     }
