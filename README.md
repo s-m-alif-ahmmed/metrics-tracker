@@ -29,20 +29,8 @@ php artisan migrate
 ℹ️ The JavaScript tracking file will be published to public/vendor/alifahmmed/metrics-tracker.js.
 
 🔧 Setup
-1. Add Trait to Your Models
-   Add the HasMetrics trait to any model you want to track:
 
-```bash
-use AlifAhmmed\MetricsTracker\Traits\HasMetrics;
-
-class Post extends Model
-{
-    use HasMetrics;
-}
-
-```
-
-2. Expose Token in Blade or API
+1. Expose Token in Blade or API
    Use the provided helper to generate a metric token and attach it to your rendered elements:
 
 ```bash
@@ -60,7 +48,7 @@ class Post extends Model
 
 ```
 
-3. Include the JS Script
+2. Include the JS Script
    Add the script to your Blade layout (usually in <head> or at the end of <body>):
 
 ```bash
