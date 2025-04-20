@@ -23,7 +23,7 @@ class MetricsTrackerServiceProvider extends ServiceProvider
         // Publishable assets
         $this->publishes([
             __DIR__.'/../public/js/metrics-tracker.js' => public_path('package/alifahmmed/metrics-tracker.js'),
-            __DIR__.'/../database/migrations' => database_path('migrations/2025_04_20_063458_create_metrics_table.php'),
+            __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'public');
 
     }
