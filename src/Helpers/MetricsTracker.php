@@ -2,7 +2,7 @@
 
 namespace AlifAhmmed\MetricsTracker\Helpers;
 
-use AlifAhmmed\Models\Metric;
+use AlifAhmmed\MetricsTracker\Models\Metric;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 

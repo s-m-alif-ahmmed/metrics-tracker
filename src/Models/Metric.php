@@ -1,6 +1,6 @@
 <?php
 
-namespace AlifAhmmed\Models;
+namespace AlifAhmmed\MetricsTracker\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace AlifAhmmed\Http\Controllers;
+namespace AlifAhmmed\MetricsTracker\Http\Controllers;
 
-use AlifAhmmed\Helpers\MetricsTracker;
+use AlifAhmmed\MetricsTracker\Helpers\MetricsTracker;
 use Illuminate\Http\Request;
 
 class MetricsController extends Controller
