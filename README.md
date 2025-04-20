@@ -30,7 +30,22 @@ php artisan migrate
 
 🔧 Setup
 
-1. Expose Token in Blade or API
+1. Use in Controller
+   Use this codes for store the data:
+
+```bash
+
+use AlifAhmmed\MetricsTracker\Helpers\MetricsTracker;
+
+// for Impression store write it in index function
+MetricsTracker::trackImpressionsForCollection($data);
+
+// for Click store write it in show function
+MetricsTracker::trackClickAndGenerateToken($data);
+
+```
+
+2. Expose Token in Blade or API
    Use the provided helper to generate a metric token and attach it to your rendered elements:
 
 ```bash
@@ -38,7 +53,9 @@ php artisan migrate
     $metricToken = AlifAhmmed\MetricsTracker\Helpers\MetricsTracker::generateMetricToken($post);
 @endphp
 
-<div class="track-item" data-track-token="{{ $metricToken }}" data-id="{{ $data->id }}">
+// write the data id and its ready for use
+
+<div class="track-item" data-track-token="{{ $metricToken }}" data-id="">
     {{ $post->title }}
 </div>
 
@@ -48,7 +65,7 @@ php artisan migrate
 
 ```
 
-2. Include the JS Script
+3. Include the JS Script
    Add the script to your Blade layout (usually in <head> or at the end of <body>):
 
 ```bash
