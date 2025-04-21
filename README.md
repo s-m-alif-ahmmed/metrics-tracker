@@ -10,7 +10,6 @@ A Laravel package to **track impressions, clicks, and CTR** (Click-Through Rate)
 - ✅ Track clicks (when user interacts)
 - ✅ Automatically generates CTR (Click-Through Rate)
 - ✅ Supports polymorphic relationships
-- ✅ Includes JavaScript snippet for easy frontend integration
 - ✅ Artisan command to clean old records
 
 ---
@@ -18,60 +17,92 @@ A Laravel package to **track impressions, clicks, and CTR** (Click-Through Rate)
 ## 📦 Installation
 
 ```bash
+
 composer require alifahmmed/metrics-tracker
 ```
-Then publish the migration and public JS assets:
+Then publish the migration:
 
 ```bash
 php artisan vendor:publish --tag=public
 php artisan migrate
 ```
-ℹ️ The JavaScript tracking file will be published to public/vendor/alifahmmed/metrics-tracker.js.
 
 🔧 Setup
 
-1. Use in Controller
-   Use this codes for store the data:
+🎮 1. How to Use in Controller
+You can easily integrate metrics tracking (impressions and clicks) directly in your controllers.
+
+👁️ Store Impressions (e.g., in index() method)
+To track impressions when showing a list of items:
 
 ```bash
 
 use AlifAhmmed\MetricsTracker\Helpers\MetricsTracker;
 
-// for Impression store write it in index function
+$data = YourModel::all(); // Replace with your model
 MetricsTracker::trackImpressionsForCollection($data);
+```
+This will:
 
-// for Click store write it in show function
+Store an impression only once per user/IP per day
+
+Automatically attach a metric_token to each model for tracking clicks
+
+🖱️ Store Clicks (e.g., in show() method)
+To track clicks when a user views or interacts with a single item:
+
+```bash
+
+use AlifAhmmed\MetricsTracker\Helpers\MetricsTracker;
+
+$data = YourModel::findOrFail($id); // Replace with your model
 MetricsTracker::trackClickAndGenerateToken($data);
-
 ```
 
-2. Expose Token in Blade or API
-   Use the provided helper to generate a metric token and attach it to your rendered elements:
+This will:
 
+Store a click only if an impression exists for today
+
+Attach the metric_token to the model for reference
+
+🔍 2. Filter Metrics by Days
+You can filter impressions and clicks by a specific range of days using this snippet:
 ```bash
-@php
-    $metricToken = AlifAhmmed\MetricsTracker\Helpers\MetricsTracker::generateMetricToken($post);
-@endphp
 
-// write the data id and its ready for use
+$request->validate([
+    'days' => 'required|in:1,7,14,30,60,90,180,365',
+]);
 
-<div class="track-item" data-track-token="{{ $metricToken }}" data-id="">
-    {{ $post->title }}
-</div>
+$days = $request->days;
 
-<a href="{{ route('posts.show', $post) }}" class="track-click" data-track-token="{{ $metricToken }}">
-    Read More
-</a>
-
+$metrics = MetricsTracker::getMetricsByDays($days);
 ```
+Accepted values for days:
+1, 7, 14, 30, 60, 90, 180, 365
 
-3. Include the JS Script
-   Add the script to your Blade layout (usually in <head> or at the end of <body>):
+This will return all metrics grouped by:
 
+trackable_type
+
+type (impression or click)
+
+date
+
+📈 3. Calculate CTR (Click-Through Rate)
+To calculate CTR for a specific model, ID, and day range, use:
 ```bash
-<script src="{{ asset('vendor/alifahmmed/metrics-tracker.js') }}"></script>
 
+use App\Models\YourModel;
+
+$ctr = MetricsTracker::calculateCTR(YourModel::class, $trackableId, 30);
 ```
+Replace YourModel::class with your actual model class.
+
+Replace $trackableId with the model ID.
+
+Replace 30 with any day value (1, 7, 14, 30, 60, 90, 180, 365).
+
+If there are no impressions, the CTR will return 0.
 
 📊 How It Works
 👁️ Impression is tracked when an element becomes visible in the viewport.
@@ -84,6 +115,7 @@ MetricsTracker::trackClickAndGenerateToken($data);
 Clean up metrics older than 90 days (adjustable):
 
 ```bash
+
 php artisan metrics:clean
 ```
 
@@ -91,6 +123,7 @@ php artisan metrics:clean
 If you're building a SPA or headless app, you can also generate tokens server-side:
 
 ```bash
+
 use AlifAhmmed\MetricsTracker\Helpers\MetricsTracker;
 
 $token = MetricsTracker::generateMetricToken($post);
