@@ -77,6 +77,19 @@ class MetricsTracker
             ]);
             return;
         }
+
+        if ($type === 'click' && !$clickExists) {
+            Metric::create([
+                'trackable_id'   => $trackable?->id,
+                'trackable_type' => get_class($trackable),
+                'type'           => 'click',
+                'user_id'        => auth()->id(),
+                'url'            => $url ?? Request::url(),
+                'device_ip'      => $ip,
+            ]);
+            return;
+        }
+
         return;
     }
 
